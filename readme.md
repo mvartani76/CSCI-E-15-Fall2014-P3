@@ -1,11 +1,12 @@
-## Developer's Best Friend - DWA Project 3 - Mike Vartanian
+## Developer's Best Friend
+### DWA Project 3 - Mike Vartanian
 
 Laravel based web application that generates a user specified number of lorem ipsum text paragaphs as well as generating
 random user data.
 
 The lorem ipsum text paragraph and random user generators were taken from packagist.org at the following URLs:
 
-lorem-ipsum: https://packagist.org/packages/badcow/lorem-ipsum
+lorem-ipsum: https://packagist.org/packages/badcow/lorem-ipsum<br>
 Random User: https://packagist.org/packages/fzaninotto/faker
 
 ## Laravel PHP Framework
