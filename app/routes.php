@@ -11,7 +11,24 @@
 |
 */
 
+// landing page
 Route::get('/', function()
 {
-	return View::make('hello');
+	return View::make('index');
 });
+
+// Generate view when URI is /lorem-ipsum
+Route::get('/lorem-ipsum', function(){
+	return View::make('lorem-ipsum');
+});
+
+// Generate a view when receiving post msg with 'numpars' variable
+// and then go back to the /lorem-ipsum view with 'numpars' set to
+// generate some lorem-ipsum text paragraphs
+Route::post('/lorem-ipsum', function(){
+	$numpars = Input::get('numpars');
+    return View::make('lorem-ipsum')
+        	->with('numpars', $numpars);
+});
+
+?>
