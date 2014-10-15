@@ -3,9 +3,7 @@
 		@extends('master')
 		@section('header')
 			{{ HTML::style('css/bootstrap.min.css'); }}
-			@if(isset($breed))
-				{{link_to('/', 'Back to the overview')}}
-			@endif
+			{{ link_to('/', 'Back to the Main Page') }}
 			<h2>This is my lorem-ipsum page</h2>
 		@stop
 		@section('content')
