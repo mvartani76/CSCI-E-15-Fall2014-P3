@@ -8,6 +8,38 @@
 			{{ HTML::script('//code.jquery.com/ui/1.11.1/jquery-ui.js'); }}
 			{{ HTML::script('js/jquery.timers.js'); }}
 			{{ HTML::script('js/mbTooltip.js'); }}
+
+
+<script type="text/javascript">
+  function saveScrollPositions(theForm) {
+
+    if(theForm) {
+      var scrolly = typeof window.pageYOffset != 'undefined' ? window.pageYOffset : document.documentElement.scrollTop;
+      var scrollx = typeof window.pageXOffset != 'undefined' ? window.pageXOffset : document.documentElement.scrollLeft;
+
+      theForm.scrollx.value = scrollx;
+      theForm.scrolly.value = scrolly;
+    }
+  }
+</script>
+
+
+  <script>
+  $(function() {
+    var tooltips = $( "[title]" ).tooltip({
+      position: {
+        my: "left",
+        at: "center center",
+        collision: "flipfit"
+      }
+
+    });
+  });
+  </script>
+
+
+
+
 			{{ link_to('/', 'Back to the Main Page') }}
     		<meta charset="utf-8">
     		<title>xkcd Password Generator</title>
@@ -81,11 +113,10 @@
 		<div class="row">
 			<div class="col-lg-6">
 				<div class="well-password">
-					{{ Form::open(array('url' => 'xkcd-passwd-gen', 'method' =>'post', 'class' => 'form-horizontal')) }}
-              <!--<form name="myform" method="post" class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return saveScrollPositions(this);">
+					{{ Form::open(array('url' => 'xkcd-passwd-gen', 'method' =>'post', 'class' => 'form-horizontal', 'onsubmit' => 'return saveScrollPositions(this);')) }}
+              <!--<form name="myform" method="post" class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" onsubmit="return saveScrollPositions(this);">-->
                 <input type="hidden" name="scrollx" id="scrollx" value="0" />
                 <input type="hidden" name="scrolly" id="scrolly" value="0" />
--->
 					<fieldset>
 					<legend>Password Parameters</legend>
 						<div class="form-group">
@@ -128,7 +159,6 @@
 							</div>
 							<div class="col-lg-3 col-lg-offset-2">
 								{{ Form::select('WordLengthMax', array(
-									'1'		=> '1',
 									'2'		=> '2',
 									'3'		=> '3',
 									'4'		=> '4',
@@ -184,7 +214,7 @@
 									array('class' => 'form-control')) }}
 							</div>
 							<div class="col-lg-3 col-lg-offset-2">
-								{{ Form::select('NumChars', array(
+								{{ Form::select('Separator', array(
 									'-'			=> '-',
 									'&nbsp;'	=> '&nbsp;',
 									'_'			=> '_'
@@ -205,7 +235,7 @@
 				 	<fieldset id="submit-field">
                   		<div class="form-group">
                     		<div class="col-lg-12">
-								{{ Form::submit("Submit", array('class'=>'btn btn-primary btn-block'))}}
+								{{ Form::submit('Submit', array('class'=>'btn btn-primary btn-block'))}}
 								{{ Form::close() }}
 							</div>
 						</div>
@@ -217,30 +247,39 @@
 			<div class="well-password">
 				<fieldset id="outputs">
 					<legend>Password Outputs<legend>
-					<br>
+					@if(isset($NumWords))
+					<?php 
+					
+					// create a PasswdGen instance
+					$passwdgen = new PasswdGen();
+					?>
+
+
+
 				<div class="form-group">
 					{{ Form::label(null,'Password 1', array( 'class' => 'control-label text-warning'))}}
-                  <input type="text"  class="form-control" id="inputDefault" value ="<?php if ( isset( $_POST['submit'] ) ) {
-                                                    print_r(generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars));} ?>">
+                  <input type="text" class="form-control" id="inputDefault" value ="<?php
+                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars)); ?>">
                 </div>
 
 				<div class="form-group">
                   {{ Form::label(null,'Password 2', array( 'class' => 'control-label text-info'))}}
-                  <input type="text" class="form-control" id="inputDefault" value ="<?php if ( isset( $_POST['submit'] ) ) {
-                                                    print_r(generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars));} ?>">
+                  <input type="text" class="form-control" id="inputDefault" value ="<?php /*if ( isset( $_POST['submit'] ) )*/ {
+                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars));} ?>">
 				</div>
 
 				<div class="form-group">
                   {{ Form::label(null,'Password 3', array( 'class' => 'control-label text-danger'))}}
-                  <input type="text" class="form-control" id="inputDefault" value ="<?php if ( isset( $_POST['submit'] ) ) {
-                                                    print_r(generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars));} ?>">
+                  <input type="text" class="form-control" id="inputDefault" value ="<?php /*if ( isset( $_POST['submit'] ) )*/ {
+                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars));} ?>">
 				</div>
 
 				<div class="form-group">
                   {{ Form::label(null,'Password 4', array( 'class' => 'control-label text-success'))}}
-                  <input type="text" class="form-control" id="inputDefault" value ="<?php if ( isset( $_POST['submit'] ) ) {
-                                                    print_r(generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars));} ?>">
+                  <input type="text" class="form-control" id="inputDefault" value ="<?php /*if ( isset( $_POST['submit'] ) )*/ {
+                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars));} ?>">
 				</div>
+				@endif
 				</fieldset>
 			</div>
 		</div>
@@ -259,5 +298,28 @@
 				</div>
 			</div>
 		@stop
+		@section('misc')
+		   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    		<script src="js/bootstrap.min.js"></script>
+    		<script src="js/bootswatch.js"></script>
+
+    <?php
+      $scrollx = 0;
+      $scrolly = 0;
+
+      if(!empty($_REQUEST['scrollx'])) {
+        $scrollx = $_REQUEST['scrollx'];
+      }
+
+      if(!empty($_REQUEST['scrolly'])) {
+        $scrolly = $_REQUEST['scrolly'];
+      }
+    ?>
+
+    <script type="text/javascript">
+      window.scrollTo(<?php echo "$scrollx" ?>, <?php echo "$scrolly" ?>);
+    </script>
+    @stop
+
 	</body>
 </html>
