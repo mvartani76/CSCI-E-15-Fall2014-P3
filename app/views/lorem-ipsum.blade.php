@@ -3,8 +3,8 @@
 		@extends('master')
 		@section('header')
 			{{ HTML::style('css/bootstrap.min.css'); }}
-			{{ link_to('/', 'Back to the Main Page') }}
-			<h2>This is my lorem-ipsum page</h2>
+			{{ link_to('/', 'Back to the Main Page', array('class'=> 'btn btn-info')) }}
+			<h2>Lorem-ipsum Paragraph Generator</h2>
 		@stop
 		@section('content')
 			<div class="form-group">
