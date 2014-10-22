@@ -9,7 +9,7 @@
 		@section('content')
 			<div class="form-group">
 				{{ Form::open(array('url' => 'random-user','method' =>'post')) }}
-				<div class = "form2">{{ Form::label('numusers', 'Number of Users')}}</div>
+				{{ Form::label('numusers', 'Number of Users', array('class' => 'form2'))}}
 				<div style="float:left">
 					<!-- Wanted to use the following syntax but couldn't get the correct formatting (ie size) {{ Form::text('numusers') }} -->
 					<input type="text" name="numusers" size="5">
@@ -17,7 +17,7 @@
 				</br>
 			</div>
 			<div class="form-group">
-				<div class = "form2">{{ Form::label('address', 'Include Address?')}}</div>
+				{{ Form::label('address', 'Include Address?', array('class' => 'form2'))}}
 				<div style="float:left">
 					{{ Form::Radio('address','Yes')}}Yes
 					{{ Form::Radio('address','No')}}No
@@ -25,7 +25,7 @@
 				</br>
 			</div>
 			<div class="form-group">
-				<div class = "form2">{{ Form::label('phonenum', 'Include Phone Number?')}}</div>
+				{{ Form::label('phonenum', 'Include Phone Number?', array('class' => 'form2'))}}
 				<div style="float:left">
 					{{ Form::Radio('phonenum','Yes')}}Yes
 					{{ Form::Radio('phonenum','No')}}No
@@ -33,7 +33,7 @@
 				</br>
 			</div>
 			<div class="form-group">
-				<div class = "form2">{{ Form::label('incemail', 'Include Email Address?')}}</div>
+				{{ Form::label('incemail', 'Include Email Address?', array('class' => 'form2'))}}
 				<div style="float:left">
 					{{ Form::Radio('incemail','Yes')}}Yes
 					{{ Form::Radio('incemail','No')}}No
@@ -41,7 +41,7 @@
 				</br>
 			</div>
 			<div class="form-group">
-				<div class = "form2">{{ Form::label('companyname', 'Include Company Name?')}}</div>
+				{{ Form::label('companyname', 'Include Company Name?', array('class' => 'form2'))}}
 				<div style="float:left">
 					{{ Form::Radio('companyname','Yes')}}Yes
 					{{ Form::Radio('companyname','No')}}No
@@ -49,7 +49,7 @@
 				</br>
 			</div>
 			<div class="form-group">
-				<div class = "form2">{{ Form::label('birthdate', 'Include Birthdate?')}}</div>
+				{{ Form::label('birthdate', 'Include Birthdate?', array('class' => 'form2'))}}
 				<div style="float:left">
 					{{ Form::Radio('birthdate','Yes')}}Yes
 					{{ Form::Radio('birthdate','No')}}No
