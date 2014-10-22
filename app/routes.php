@@ -60,4 +60,24 @@ Route::get('/xkcd-passwd-gen', function(){
 	return View::make('xkcd-passwd-gen');
 });
 
+Route::post('xkcd-passwd-gen', function(){
+	
+	$NumWords = Input::get('NumWords');
+	$WordLengthMin = Input::get('WordLengthMin');
+	$WordLengthMax = Input::get('WordLengthMax');
+	$NumNums = Input::get('NumNums');
+	$NumChars = Input::get('NumChars');
+	$Separator = Input::get('Separator');
+	$CapWords = Input::get('CapWords');
+
+    return View::make('xkcd-passwd-gen')
+        	->with('NumWords', $NumWords)
+        	->with('WordLengthMin', $WordLengthMin)
+        	->with('WordLengthMax', $WordLengthMax)
+        	->with('NumNums', $NumNums)
+        	->with('NumChars', $NumChars)
+        	->with('Separator', $Separator)
+        	->with('CapWords', $CapWords);
+});
+
 ?>
