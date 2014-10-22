@@ -37,10 +37,7 @@
   });
   </script>
 
-
-
-
-			{{ link_to('/', 'Back to the Main Page') }}
+			{{ link_to('/', 'Back to the Main Page', array("class"=>"btn btn-warning")) }}
     		<meta charset="utf-8">
     		<title>xkcd Password Generator</title>
     		<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -80,7 +77,7 @@
 	                                            jQuery added in for some visual effects.</p>
 	                  <h3>Bootstrap</h3>
 	                    <p class="text-danger"> A simple, single flat page was employed using the following free bootstrap template called Bootswatch designed by Thomas Park with the source URL located here
-	                                            <a href="http://bootswatch.com/slate/">Slate Bootswatch Theme</a>. The free theme looked contemporary and the form inputs were very appealing
+	                                            {{ link_to('http://bootswatch.com/slate/', 'Slate Bootswatch Theme') }}. The free theme looked contemporary and the form inputs were very appealing
 	                                            for this assignment.</p>
 	                  <h3>Form Inputs</h3>
 	                    <p class="text-success"> I went back and forth between dropdowns and text boxes in order to make error checking easier. Dropdowns already provide some sort of inherit error
@@ -93,7 +90,7 @@
 	                    <p class="text-primary"> Initially I started with a large wordlist with 100k words that had many variants of words such as contractions and possesives.
 	                                            This took processing time to load and required manual adjustment such as removing the apostrophes to simplify the code and fix errors.
 	                                            Therefore, I found a Google wordlist with 10k words which was more manageable to work with. The source URL for the Google wordlist is located here
-	                                            <a href="https://github.com/first20hours/google-10000-english">Google 10k Wordlist</a>.</p>
+	                                            {{ link_to('https://github.com/first20hours/google-10000-english', 'Google 10k Wordlist') }}.</p>
 	              </div>
 	          </div>
 	        </div>
@@ -103,7 +100,7 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="page-header">
-						<h1 id="forms" title="what the hell is this?">Let's Generate Some Passwords!!</h1>
+						<h1 id="forms" title="Please use the parameters below to generate passwords...">Let's Generate Some Passwords!!</h1>
 					</div>
 				</div>
 			</div>
