@@ -25,6 +25,14 @@
 			</blockquote>
 			<a href='/random-user' class="btn btn-info">Generate Random Users...</a>
 		</div>
+		<div class="well">
+			<h2 class="text-warning">xkcd Password Generator</h2>
+			<blockquote>An xkcd Password Generator is a type of password generator that attempts to create memorable passwords for humans that are also difficult for
+				computers to guess. The basic argument behind the strength of the password is that a longer password will have more entropy than a shorter password
+				independent of the characters use as a computer does not care if the password contains actual words or not.
+			</blockquote>
+			<a href='/xkcd-passwd-gen' class="btn btn-success">Generate xkcd Passwords...</a>
+		</div>
 		@stop
 	</body>
 </html>
