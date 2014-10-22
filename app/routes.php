@@ -55,4 +55,9 @@ Route::post('/random-user', function(){
         	->with('birthdate', $birthdate);
 });
 
+// Generate view when URI is /random-user
+Route::get('/xkcd-passwd-gen', function(){
+	return View::make('xkcd-passwd-gen');
+});
+
 ?>
