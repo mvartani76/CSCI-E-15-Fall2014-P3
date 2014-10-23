@@ -15,16 +15,19 @@
 				{{ Form::close() }}
 
 			</div>
-					@if ($errors->has())
-					<div class="col-lg-4 text-center">
-					<div class="alert alert-dismissable alert-danger">
+
+			<!-- Show error messages under the input text box if present -->
+			@if ($errors->has())
+			<div class="col-lg-4 text-center">
+				<div class="alert alert-dismissable alert-danger">
 					@foreach ($errors->all() as $error)
 						<strong>{{ $error }}</strong>
 					@endforeach
-					</div>
 				</div>
+			</div>
 				@endif
 			
+			<!-- If $numpars is set and there are no error messages, generate paragraphs -->
 			@if(isset($numpars))
 			<?php
 				$generator = new Badcow\LoremIpsum\Generator();
