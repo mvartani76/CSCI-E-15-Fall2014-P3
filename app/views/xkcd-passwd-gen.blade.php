@@ -10,32 +10,30 @@
 			{{ HTML::script('js/mbTooltip.js'); }}
 
 
-<script type="text/javascript">
-  function saveScrollPositions(theForm) {
+			<script type="text/javascript">
+				function saveScrollPositions(theForm) {
 
-    if(theForm) {
-      var scrolly = typeof window.pageYOffset != 'undefined' ? window.pageYOffset : document.documentElement.scrollTop;
-      var scrollx = typeof window.pageXOffset != 'undefined' ? window.pageXOffset : document.documentElement.scrollLeft;
+					if(theForm) {
+						var scrolly = typeof window.pageYOffset != 'undefined' ? window.pageYOffset : document.documentElement.scrollTop;
+						var scrollx = typeof window.pageXOffset != 'undefined' ? window.pageXOffset : document.documentElement.scrollLeft;
 
-      theForm.scrollx.value = scrollx;
-      theForm.scrolly.value = scrolly;
-    }
-  }
-</script>
+						theForm.scrollx.value = scrollx;
+						theForm.scrolly.value = scrolly;
+					}
+				}
+			</script>
 
-
-  <script>
-  $(function() {
-    var tooltips = $( "[title]" ).tooltip({
-      position: {
-        my: "left",
-        at: "center center",
-        collision: "flipfit"
-      }
-
-    });
-  });
-  </script>
+			<script>
+				$(function() {
+					var tooltips = $( "[title]" ).tooltip({
+						position: {
+						my: "left",
+						at: "center center",
+						collision: "flipfit"
+						}
+					});
+				});
+			</script>
 
 			{{ link_to('/', 'Back to the Main Page', array("class"=>"btn btn-warning")) }}
     		<meta charset="utf-8">
@@ -131,7 +129,7 @@
 									'9'		=> '9',
 									'10'	=> '10'
 									), null, 
-									array('class' => 'form-control',
+									array('class' => 'col-lg-3 form-control',
 										  'id' => 'select1')) }}
 							</div>
 						</div>
@@ -246,37 +244,37 @@
 					<legend>Password Outputs<legend>
 					@if(isset($NumWords))
 					<?php 
-					
-					// create a PasswdGen instance
-					$passwdgen = new PasswdGen();
+						// create a PasswdGen instance
+						$passwdgen = new PasswdGen();
 					?>
-
-
+					@endif
 
 				<div class="form-group">
 					{{ Form::label(null,'Password 1', array( 'class' => 'control-label text-warning'))}}
-                  <input type="text" class="form-control" id="inputDefault" value ="<?php
-                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars)); ?>">
+                  
+                  <input type="text" class="form-control" id="inputDefault" value = @if(isset($NumWords)) "<?php
+                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars)); ?>" @endif>
+      			
                 </div>
 
 				<div class="form-group">
                   {{ Form::label(null,'Password 2', array( 'class' => 'control-label text-info'))}}
-                  <input type="text" class="form-control" id="inputDefault" value ="<?php /*if ( isset( $_POST['submit'] ) )*/ {
-                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars));} ?>">
+                  <input type="text" class="form-control" id="inputDefault" value = @if(isset($NumWords)) "<?php
+                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars)); ?>" @endif>
 				</div>
 
 				<div class="form-group">
                   {{ Form::label(null,'Password 3', array( 'class' => 'control-label text-danger'))}}
-                  <input type="text" class="form-control" id="inputDefault" value ="<?php /*if ( isset( $_POST['submit'] ) )*/ {
-                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars));} ?>">
+                  <input type="text" class="form-control" id="inputDefault" value = @if(isset($NumWords)) "<?php
+                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars)); ?>" @endif>
 				</div>
 
 				<div class="form-group">
                   {{ Form::label(null,'Password 4', array( 'class' => 'control-label text-success'))}}
-                  <input type="text" class="form-control" id="inputDefault" value ="<?php /*if ( isset( $_POST['submit'] ) )*/ {
-                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars));} ?>">
+                  <input type="text" class="form-control" id="inputDefault" value = @if(isset($NumWords)) "<?php
+                                                    print_r($passwdgen->generate_password($NumWords,$Separator,$NumNums,$WordLengthMin,$WordLengthMax,$CapWords,$NumChars)); ?>" @endif>
 				</div>
-				@endif
+				
 				</fieldset>
 			</div>
 		</div>
@@ -296,27 +294,26 @@
 			</div>
 		@stop
 		@section('misc')
-		   <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    		<script src="js/bootstrap.min.js"></script>
-    		<script src="js/bootswatch.js"></script>
+			<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+			<script src="js/bootstrap.min.js"></script>
+			<script src="js/bootswatch.js"></script>
 
-    <?php
-      $scrollx = 0;
-      $scrolly = 0;
+			<?php
+				$scrollx = 0;
+				$scrolly = 0;
 
-      if(!empty($_REQUEST['scrollx'])) {
-        $scrollx = $_REQUEST['scrollx'];
-      }
+				if(!empty($_REQUEST['scrollx'])) {
+					$scrollx = $_REQUEST['scrollx'];
+				}
 
-      if(!empty($_REQUEST['scrolly'])) {
-        $scrolly = $_REQUEST['scrolly'];
-      }
-    ?>
+				if(!empty($_REQUEST['scrolly'])) {
+					$scrolly = $_REQUEST['scrolly'];
+				}
+			?>
 
-    <script type="text/javascript">
-      window.scrollTo(<?php echo "$scrollx" ?>, <?php echo "$scrolly" ?>);
-    </script>
-    @stop
-
+			<script type="text/javascript">
+				window.scrollTo(<?php echo "$scrollx" ?>, <?php echo "$scrolly" ?>);
+			</script>
+		@stop
 	</body>
 </html>
