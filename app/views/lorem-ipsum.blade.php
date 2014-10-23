@@ -25,7 +25,7 @@
 					@endforeach
 				</div>
 			</div>
-				@endif
+			@endif
 			
 			<!-- If $numpars is set and there are no error messages, generate paragraphs -->
 			@if(isset($numpars))
