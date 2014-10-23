@@ -36,7 +36,7 @@ Route::post('/lorem-ipsum', function(){
 	// Setup the messages array
 	$messages = array(
 				'required' => 'This field is required to generate text',
-				'integer' => 'Input must be a digit',
+				'integer' => 'Input must be an integer',
 				'min' => 'Input must be greater than or equal to 1');
 
 	// create a new validator instance
@@ -54,9 +54,9 @@ Route::get('/random-user', function(){
 	return View::make('random-user');
 });
 
-// Generate a view when receiving post msg with 'numpars' variable
-// and then go back to the /lorem-ipsum view with 'numpars' set to
-// generate some lorem-ipsum text paragraphs
+// Generate a view when receiving post msg with the various variables
+// and then go back to the /random-user view with variables set to
+// generate some random-user details...
 Route::post('/random-user', function(){
 	$numusers = Input::get('numusers');
 	$address = Input::get('address');
@@ -64,13 +64,35 @@ Route::post('/random-user', function(){
 	$incemail = Input::get('incemail');
 	$companyname = Input::get('companyname');
 	$birthdate = Input::get('birthdate');
-    return View::make('random-user')
-        	->with('numusers', $numusers)
-        	->with('address', $address)
-        	->with('phonenum', $phonenum)
-        	->with('incemail', $incemail)
-        	->with('companyname', $companyname)
-        	->with('birthdate', $birthdate);
+
+	// might be a little redundancy here since the variables
+	// are loaded above as well...
+	$data = Input::all();
+
+	// Setup the rules array
+	$rules = array(
+			'numusers' => 'Required|Integer|Min:1');
+
+	// Setup the messages array
+	$messages = array(
+				'required' => 'This field is required to generate users',
+				'integer' => 'Input must be an integer',
+				'min' => 'Input must be greater than or equal to 1');
+
+	// create a new validator instance
+	$validator = Validator::make($data, $rules, $messages);
+
+	if ($validator->passes()){
+	    return View::make('random-user')
+	        	->with('numusers', $numusers)
+	        	->with('address', $address)
+	        	->with('phonenum', $phonenum)
+	        	->with('incemail', $incemail)
+	        	->with('companyname', $companyname)
+	        	->with('birthdate', $birthdate);
+	        }
+
+		return Redirect::to('random-user')->withErrors($validator);
 });
 
 // Generate view when URI is /random-user
