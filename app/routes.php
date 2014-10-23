@@ -27,8 +27,26 @@ Route::get('/lorem-ipsum', function(){
 // generate some lorem-ipsum text paragraphs
 Route::post('/lorem-ipsum', function(){
 	$numpars = Input::get('numpars');
-    return View::make('lorem-ipsum')
-        	->with('numpars', $numpars);
+	$data = Input::all();
+
+	// Setup the rules array
+	$rules = array(
+			'numpars' => 'Required|Integer|Min:1');
+
+	// Setup the messages array
+	$messages = array(
+				'required' => 'This field is required to generate text',
+				'integer' => 'Input must be a digit',
+				'min' => 'Input must be greater than or equal to 1');
+
+	// create a new validator instance
+	$validator = Validator::make($data, $rules, $messages);
+
+	if ($validator->passes()){
+    	return View::make('lorem-ipsum')
+        		->with('numpars', $numpars);
+    }
+    	return Redirect::to('lorem-ipsum')->withErrors($validator);
 });
 
 // Generate view when URI is /random-user
