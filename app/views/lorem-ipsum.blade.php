@@ -10,10 +10,21 @@
 			<div class="form-group">
 				{{ Form::open(array('url' => 'lorem-ipsum','method' =>'post')) }}
 				{{ Form::label('numpars', 'Number of Paragraphs')}}
-				{{ Form::text('numpars') }}
+				{{ Form::text('numpars') }}				
 				{{ Form::submit("Generate Text", array("class"=>"btn btn-default"))}}
 				{{ Form::close() }}
+
 			</div>
+					@if ($errors->has())
+					<div class="col-lg-4 text-center">
+					<div class="alert alert-dismissable alert-danger">
+					@foreach ($errors->all() as $error)
+						<strong>{{ $error }}</strong>
+					@endforeach
+					</div>
+				</div>
+				@endif
+			
 			@if(isset($numpars))
 			<?php
 				$generator = new Badcow\LoremIpsum\Generator();
