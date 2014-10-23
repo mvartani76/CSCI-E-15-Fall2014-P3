@@ -3,7 +3,7 @@
 		@extends('master')
 		@section('header')
 			{{ HTML::style('css/bootstrap.min.css'); }}
-			{{ link_to('/', 'Back to the Main Page') }}
+			{{ link_to('/', 'Back to the Main Page', array("class"=>"btn btn-success")) }}
 			<h2>Random User Generator</h2>
 		@stop
 		@section('content')
@@ -14,7 +14,20 @@
 					<!-- Wanted to use the following syntax but couldn't get the correct formatting (ie size) {{ Form::text('numusers') }} -->
 					<input type="text" name="numusers" size="5">
 				</div>
-				</br>
+				
+							<!-- Show error messages under the input text box if present -->
+							@if ($errors->has())
+							</br></br>
+							<div class="col-lg-4 text-center">
+								<div class="alert alert-dismissable alert-danger">
+									@foreach ($errors->all() as $error)
+										<strong>{{ $error }}</strong>
+									@endforeach
+								</div>
+							</div>
+							</br></br>
+							@endif
+							</br>
 			</div>
 			<div class="form-group">
 				{{ Form::label('address', 'Include Address?', array('class' => 'form2'))}}
@@ -98,18 +111,10 @@
 						echo "<div class = \"form2\">", "Birthdate: ", "</div>", $faker->date($format='Y-m-d', $max='now');
 						echo nl2br(" \r\n");
 					}
-					// Add an additional line break if multiple fields are chosen to make more readable
-					//if (($address == "Yes") or ($phonenum == "Yes") or ($incemail == "Yes") or ($companyname == "Yes")
-					//	or ($birthdate == "Yes"))
-					//	echo nl2br(" \r\n");
 					echo "</div>";
 				}
-
 			?>
 			@endif
-		</p>
-			
 		@stop
-
 	</body>
 </html>
