@@ -16,7 +16,8 @@ Random User: https://packagist.org/packages/fzaninotto/faker
 
 ## Demo
 
-As a remote student, my demo is located in jing at the following location http://screencast.com/t/YzFYwFCN
+As a remote student, my demo is located in jing at the following location http://screencast.com/t/YzFYwFCN. My apologies for the poor audio
+quality on this recording. Not sure why it was so poor.
 
 ## Details for Teaching Team
 I took the following challenges for this assignment.
@@ -24,7 +25,7 @@ I took the following challenges for this assignment.
 	<li>Gave the option to include extra infor for the randomly generated users.</li>
 	<li>Added the xkcd password generator from p2 using the laravel application framework</li>
 	<li>Added the Unix Permissions Calculator based on inspiration from http://permissions-calculator.org/</li>
-	<li>Added form validation for the three pages.</li>
+	<li>Added form validation for the four pages.</li>
 </ol>
 
 ### Form Validation
