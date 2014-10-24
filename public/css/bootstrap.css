@@ -2211,7 +2211,7 @@ table th[class*="col-"] {
 .table-hover > tbody > tr > th.warning:hover,
 .table-hover > tbody > tr.warning:hover > td,
 .table-hover > tbody > tr:hover > .warning,
-.table-hover > tbody > tr.warning:hover > th {
+.stro-hover > tbody > tr.warning:hover > th {
   background-color: #df8505;
 }
 .table > thead > tr > td.danger,
@@ -6630,4 +6630,9 @@ a.thumbnail.active {
 .my-p {
   padding-bottom: 0;
   margin-bottom: 0;
+}
+.my-error-very-small-text {
+  font-size:85%;
+  height: 36px;
+  padding: 0;
 }
