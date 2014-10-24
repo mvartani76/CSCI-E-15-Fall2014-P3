@@ -53,9 +53,9 @@
 								<h3 class="panel-title">Group</h3>
 							</div>
 							<div class="panel-body">
-								{{ Form::checkbox('group_read', '0400') }}{{Form::label('group_read','Read')}}</br>
-								{{ Form::checkbox('group_write', '0200') }}{{Form::label('group_write','Write')}}</br>
-								{{ Form::checkbox('group_execute', '0100') }}{{Form::label('group_execute','Execute')}}</br>
+								{{ Form::checkbox('group_read', '0040') }}{{Form::label('group_read','Read')}}</br>
+								{{ Form::checkbox('group_write', '0020') }}{{Form::label('group_write','Write')}}</br>
+								{{ Form::checkbox('group_execute', '0010') }}{{Form::label('group_execute','Execute')}}</br>
 							</div>
 						</div>
 					</div>
@@ -67,9 +67,9 @@
 								<h3 class="panel-title">Other</h3>
 							</div>
 							<div class="panel-body">
-								{{ Form::checkbox('other_read', '0400') }}{{Form::label('other_read','Read')}}</br>
-								{{ Form::checkbox('other_write', '0200') }}{{Form::label('other_write','Write')}}</br>
-								{{ Form::checkbox('other_execute', '0100') }}{{Form::label('other_execute','Execute')}}</br>
+								{{ Form::checkbox('other_read', '0004') }}{{Form::label('other_read','Read')}}</br>
+								{{ Form::checkbox('other_write', '0002') }}{{Form::label('other_write','Write')}}</br>
+								{{ Form::checkbox('other_execute', '0001') }}{{Form::label('other_execute','Execute')}}</br>
 							</div>
 						</div>
 					</div>
@@ -79,8 +79,12 @@
 	        <div class="well">
 	        	<div id="results">
 					<h2>Absolute Notation (octal)</h2>
-					<p id="octal">0000</p>
-					<p class="example">e.g: chmod <span id="octal_example">0000</span> &lt;path-to-file&gt;</p>
+					<div class="form-group">
+						{{ Form::label(null,'Octal Output', array( 'class' => 'control-label text-warning'))}}
+						<input type="text" class="form-control" id="inputDefault" value = @if(isset($octal_output)) "<?php
+                                                    echo $octal_output; ?>" @endif>
+					</div>
+						<p>e.g: chmod {{ $octal_output }} &lt;path-to-file&gt;</p>
 				</div>
 				<div>
 					{{ Form::submit('Submit', array('class'=>'btn btn-danger btn-block'))}}
