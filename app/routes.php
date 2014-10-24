@@ -192,19 +192,19 @@ Route::post('/unix-permissions-calculator', function(){
 
 	// Input Validation but not using Validator as I added Unix Permissions last minute and
 	// did not have time to do properly... But this does give an ERROR message... :)
-	if(isset($suid))
+	if((isset($suid)) && (!isset($user_execute)))
 	{
-		if(!isset($user_execute))
+		
 			$octal_output = 'ERROR - User Execute Permissions must be set';
 	}
-	else if (isset($sgid))
+	else if ((isset($sgid)) && (!isset($group_execute)))
 	{
-		if(!isset($group_execute))
+		
 			$octal_output = 'ERROR - Group Execute Permissions must be set';
 	}
-	else if (isset($sticky_bit))
+	else if ((isset($sticky_bit)) && (!isset($other_execute)))
 	{
-		if(!isset($other_execute))
+		
 			$octal_output = 'ERROR - Other Execute Permissions must be set';
 	}
 	else
