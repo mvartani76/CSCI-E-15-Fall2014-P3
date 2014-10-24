@@ -226,10 +226,7 @@ Route::post('/unix-permissions-calculator', function(){
 				| $group_read | $group_write | $group_execute
 				| $other_read | $other_write | $other_execute;
 
-	echo (string)$octal_output;
-	echo "....";
 	$octal_strlength = strlen((string)$octal_output);
-	echo $octal_strlength;
 
 	// append leading zeros as needed
 	if ($octal_strlength == 1)
