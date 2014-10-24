@@ -10,8 +10,9 @@ lorem-ipsum: https://packagist.org/packages/badcow/lorem-ipsum<br>
 Random User: https://packagist.org/packages/fzaninotto/faker
 
 ### Interesting Code Modifications
-1. In order to have the class Passwdgen() recognized by the blade.php file, I needed to run composer dump-autoload
-2. usort() needed to be changed after it was inserted into a class.
+1. In order to have the class Passwdgen() recognized by the blade.php files, I needed to run composer dump-autoload (found out prior to lecture 7)
+2. usort() needed to be changed after it was inserted into a class
+3. Parameters for validation rules and messages arrays are case sensitive
 
 ## Laravel PHP Framework
 

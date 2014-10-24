@@ -26,18 +26,25 @@ Route::get('/lorem-ipsum', function(){
 // and then go back to the /lorem-ipsum view with 'numpars' set to
 // generate some lorem-ipsum text paragraphs
 Route::post('/lorem-ipsum', function(){
+	
+	// Create a new Routelib instance
+	$routelib = new Routelib();
+
 	$numpars = Input::get('numpars');
 	$data = Input::all();
 
 	// Setup the rules array
-	$rules = array(
-			'numpars' => 'Required|Integer|Min:1');
+	$routelib->setrules(array(
+			'numpars' => 'Required|Integer|Min:1'));
+	$rules = $routelib->getRules();
 
 	// Setup the messages array
-	$messages = array(
+	$routelib->setMessages(array(
 				'required' => 'This field is required to generate text',
 				'integer' => 'Input must be an integer',
-				'min' => 'Input must be greater than or equal to 1');
+				'min' => 'Input must be greater than or equal to 1'));
+
+	$messages = $routelib->getMessages();
 
 	// create a new validator instance
 	$validator = Validator::make($data, $rules, $messages);
@@ -58,6 +65,10 @@ Route::get('/random-user', function(){
 // and then go back to the /random-user view with variables set to
 // generate some random-user details...
 Route::post('/random-user', function(){
+	
+	// Create a new Routelib instance
+	$routelib = new Routelib();
+
 	$numusers = Input::get('numusers');
 	$address = Input::get('address');
 	$phonenum = Input::get('phonenum');
@@ -70,14 +81,18 @@ Route::post('/random-user', function(){
 	$data = Input::all();
 
 	// Setup the rules array
-	$rules = array(
-			'numusers' => 'Required|Integer|Min:1');
+	$routelib->setrules(array(
+			'numusers' => 'Required|Integer|Min:1'));
+
+	$rules = $routelib->getRules();
 
 	// Setup the messages array
-	$messages = array(
+	$routelib->setmessages(array(
 				'required' => 'This field is required to generate users',
 				'integer' => 'Input must be an integer',
-				'min' => 'Input must be greater than or equal to 1');
+				'min' => 'Input must be greater than or equal to 1'));
+
+	$messages = $routelib->getMessages();
 
 	// create a new validator instance
 	$validator = Validator::make($data, $rules, $messages);
