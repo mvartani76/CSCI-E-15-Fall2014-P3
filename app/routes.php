@@ -28,7 +28,7 @@ Route::get('/lorem-ipsum', function(){
 Route::post('/lorem-ipsum', function(){
 	
 	// Create a new Routelib instance
-	$routelib = new Routelib();
+	$routelib = new RouteLib();
 
 	$numpars = Input::get('numpars');
 	$data = Input::all();
@@ -67,7 +67,7 @@ Route::get('/random-user', function(){
 Route::post('/random-user', function(){
 	
 	// Create a new Routelib instance
-	$routelib = new Routelib();
+	$routelib = new RouteLib();
 
 	$numusers = Input::get('numusers');
 	$address = Input::get('address');
@@ -118,7 +118,7 @@ Route::get('/xkcd-passwd-gen', function(){
 Route::post('/xkcd-passwd-gen', function(){
 	
 	// Create a new Routelib instance
-	$routelib = new Routelib();
+	$routelib = new RouteLib();
 
 	$NumWords = Input::get('NumWords');
 	$WordLengthMin = Input::get('WordLengthMin');
