@@ -190,52 +190,72 @@ Route::post('/unix-permissions-calculator', function(){
 	$other_write = Input::get('other_write');
 	$other_execute = Input::get('other_execute');
 
-	// check to see if the variables are set...
-	// if they are not set, set them to 0000
-	// non set variables affect the bitwise OR function below
-	if(!isset($suid))
-		$suid = '0000';
-	if(!isset($sgid))
-		$sgid = '0000';
-	if(!isset($sticky_bit))
-		$sticky_bit = '0000';
-	if(!isset($user_read))
-		$user_read = '0000';
-	if(!isset($user_write))
-		$user_write = '0000';
-	if(!isset($user_execute))
-		$user_execute = '0000';
-	if(!isset($group_read))
-		$group_read = '0000';
-	if(!isset($group_write))
-		$group_write = '0000';
-	if(!isset($group_execute))
-		$group_execute = '0000';
-	if(!isset($other_read))
-		$other_read = '0000';
-	if(!isset($other_write))
-		$other_write = '0000';
-	if(!isset($other_execute))
-		$other_execute = '0000';	
+	// Input Validation but not using Validator as I added Unix Permissions last minute and
+	// did not have time to do properly... But this does give an ERROR message... :)
+	if(isset($suid))
+	{
+		if(!isset($user_execute))
+			$octal_output = 'ERROR - User Execute Permissions must be set';
+	}
+	else if (isset($sgid))
+	{
+		if(!isset($group_execute))
+			$octal_output = 'ERROR - Group Execute Permissions must be set';
+	}
+	else if (isset($sticky_bit))
+	{
+		if(!isset($other_execute))
+			$octal_output = 'ERROR - Other Execute Permissions must be set';
+	}
+	else
+	{
 
-	// perform a bitwise or to all the fields to generate the octal
-	// code. note that this will not generate the leading 0 so if
-	// the MSBs are not set, we will need to manually add the 0s in
-	$octal_output = $suid | $sgid | $sticky_bit
-				| $user_read | $user_write | $user_execute
-				| $group_read | $group_write | $group_execute
-				| $other_read | $other_write | $other_execute;
+		// check to see if the variables are set...
+		// if they are not set, set them to 0000
+		// non set variables affect the bitwise OR function below
+		if(!isset($suid))
+			$suid = '0000';
+		if(!isset($sgid))
+			$sgid = '0000';
+		if(!isset($sticky_bit))
+			$sticky_bit = '0000';
+		if(!isset($user_read))
+			$user_read = '0000';
+		if(!isset($user_write))
+			$user_write = '0000';
+		if(!isset($user_execute))
+			$user_execute = '0000';
+		if(!isset($group_read))
+			$group_read = '0000';
+		if(!isset($group_write))
+			$group_write = '0000';
+		if(!isset($group_execute))
+			$group_execute = '0000';
+		if(!isset($other_read))
+			$other_read = '0000';
+		if(!isset($other_write))
+			$other_write = '0000';
+		if(!isset($other_execute))
+			$other_execute = '0000';	
 
-	$octal_strlength = strlen((string)$octal_output);
+		// perform a bitwise or to all the fields to generate the octal
+		// code. note that this will not generate the leading 0 so if
+		// the MSBs are not set, we will need to manually add the 0s in
+		$octal_output = $suid | $sgid | $sticky_bit
+					| $user_read | $user_write | $user_execute
+					| $group_read | $group_write | $group_execute
+					| $other_read | $other_write | $other_execute;
 
-	// append leading zeros as needed
-	if ($octal_strlength == 1)
-		$octal_output = '000' . (string)$octal_output;
-	elseif ($octal_strlength == 2)
-		$octal_output = '00' . (string)$octal_output;
-	elseif ($octal_strlength == 3)
-		$octal_output = '0' . (string)$octal_output;
+		$octal_strlength = strlen((string)$octal_output);
 
+		// append leading zeros as needed
+		if ($octal_strlength == 1)
+			$octal_output = '000' . (string)$octal_output;
+		elseif ($octal_strlength == 2)
+			$octal_output = '00' . (string)$octal_output;
+		elseif ($octal_strlength == 3)
+			$octal_output = '0' . (string)$octal_output;
+	}
 	return View::make('unix-permissions-calculator')
 			->with('octal_output', $octal_output);
 });	
