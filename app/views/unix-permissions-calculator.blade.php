@@ -84,7 +84,7 @@
 						<input type="text" class="form-control" id="inputDefault" value = @if(isset($octal_output)) "<?php
                                                     echo $octal_output; ?>" @endif>
 					</div>
-						<p>e.g: chmod {{ $octal_output }} &lt;path-to-file&gt;</p>
+						<p>e.g: chmod @if(isset($octal_output)){{ $octal_output }} @endif&lt;path-to-file&gt;</p>
 				</div>
 				<div>
 					{{ Form::submit('Submit', array('class'=>'btn btn-danger btn-block'))}}
