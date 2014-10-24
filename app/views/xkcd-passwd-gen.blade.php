@@ -113,7 +113,9 @@
                 <input type="hidden" name="scrollx" id="scrollx" value="0" />
                 <input type="hidden" name="scrolly" id="scrolly" value="0" />
 					<fieldset>
-					<legend>Password Parameters</legend>
+					<legend>Password Parameters
+
+			</legend>
 						<div class="form-group">
 							{{ Form::label('select1', 'Number of Words', array('class' => 'col-lg-4 control-label',
 																				'title' => 'Number of Words that will be included in the Passphrase') )}}
@@ -187,6 +189,14 @@
 									), null,
 									array('class' => 'form-control')) }}
 							</div>
+							<!-- Show error messages under the max input box if present -->
+							@if ($errors->has())
+								<span class="alert alert-dismissable alert-danger my-error-very-small-text col-md-5 text-center">
+									@foreach ($errors->all() as $error)
+										<strong>{{ $error }}</strong>
+									@endforeach
+								</span>
+							@endif
 						</div>
 						<p class="text-right my-p">Separator&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 						<div class="form-group">

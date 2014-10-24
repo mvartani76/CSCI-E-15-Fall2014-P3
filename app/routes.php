@@ -110,13 +110,16 @@ Route::post('/random-user', function(){
 		return Redirect::to('random-user')->withErrors($validator);
 });
 
-// Generate view when URI is /random-user
+// Generate view when URI is /xkcd-passwd-gen
 Route::get('/xkcd-passwd-gen', function(){
 	return View::make('xkcd-passwd-gen');
 });
 
-Route::post('xkcd-passwd-gen', function(){
+Route::post('/xkcd-passwd-gen', function(){
 	
+	// Create a new Routelib instance
+	$routelib = new Routelib();
+
 	$NumWords = Input::get('NumWords');
 	$WordLengthMin = Input::get('WordLengthMin');
 	$WordLengthMax = Input::get('WordLengthMax');
@@ -125,14 +128,46 @@ Route::post('xkcd-passwd-gen', function(){
 	$Separator = Input::get('Separator');
 	$CapWords = Input::get('CapWords');
 
-    return View::make('xkcd-passwd-gen')
-        	->with('NumWords', $NumWords)
-        	->with('WordLengthMin', $WordLengthMin)
-        	->with('WordLengthMax', $WordLengthMax)
-        	->with('NumNums', $NumNums)
-        	->with('NumChars', $NumChars)
-        	->with('Separator', $Separator)
-        	->with('CapWords', $CapWords);
+	// might be a little redundancy here since the variables
+	// are loaded above as well...
+	$data = Input::all();
+
+	$diff = $WordLengthMax - $WordLengthMin;
+
+	$data = array_add($data,'diff', $diff);
+
+	// Setup the rules array
+	// I noticed a very interesting problem -- The validation would always show that
+	// it passed if I only had one rule, Mine:x. If I added the Integer rule to it,
+	// the validation correctly showed errors when diff was less than or equal to x
+	// and passed if diff was greater than x... Very interesting.. Didn't see any documentation
+	// that would suggest that there needed to be at least two rules and messages?
+	$routelib->setrules(array(
+			'diff' => 'Integer|Min:0'));
+
+	$rules = $routelib->getRules();
+
+	// Setup the messages array
+	$routelib->setmessages(array(
+				'integer' => 'Difference must be an Integer',
+				'min' => 'Max Word Length must be greater than or equal to Min Word Length'));
+
+	$messages = $routelib->getMessages();
+
+	// create a new validator instance
+	$validator = Validator::make($data, $rules, $messages);
+
+	if ($validator->passes()){
+	    return View::make('xkcd-passwd-gen')
+	        	->with('NumWords', $NumWords)
+	        	->with('WordLengthMin', $WordLengthMin)
+	        	->with('WordLengthMax', $WordLengthMax)
+	        	->with('NumNums', $NumNums)
+	        	->with('NumChars', $NumChars)
+	        	->with('Separator', $Separator)
+	        	->with('CapWords', $CapWords);
+	        }
+		return Redirect::to('xkcd-passwd-gen')->withErrors($validator);
 });
 
 ?>
