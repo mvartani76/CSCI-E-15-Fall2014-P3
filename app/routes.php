@@ -170,4 +170,77 @@ Route::post('/xkcd-passwd-gen', function(){
 		return Redirect::to('xkcd-passwd-gen')->withErrors($validator);
 });
 
+// Generate view when URI is /unix-permissions-calculator
+Route::get('/unix-permissions-calculator', function(){
+	return View::make('unix-permissions-calculator');
+});
+
+Route::post('/unix-permissions-calculator', function(){
+
+	$suid = Input::get('suid');
+	$sgid = Input::get('sgid');
+	$sticky_bit = Input::get('sticky_bit');
+	$user_read = Input::get('user_read');
+	$user_write = Input::get('user_write');
+	$user_execute = Input::get('user_execute');
+	$group_read = Input::get('group_read');
+	$group_write = Input::get('group_write');
+	$group_execute = Input::get('group_execute');
+	$other_read = Input::get('other_read');
+	$other_write = Input::get('other_write');
+	$other_execute = Input::get('other_execute');
+
+	// check to see if the variables are set...
+	// if they are not set, set them to 0000
+	// non set variables affect the bitwise OR function below
+	if(!isset($suid))
+		$suid = '0000';
+	if(!isset($sgid))
+		$sgid = '0000';
+	if(!isset($sticky_bit))
+		$sticky_bit = '0000';
+	if(!isset($user_read))
+		$user_read = '0000';
+	if(!isset($user_write))
+		$user_write = '0000';
+	if(!isset($user_execute))
+		$user_execute = '0000';
+	if(!isset($group_read))
+		$group_read = '0000';
+	if(!isset($group_write))
+		$group_write = '0000';
+	if(!isset($group_execute))
+		$group_execute = '0000';
+	if(!isset($other_read))
+		$other_read = '0000';
+	if(!isset($other_write))
+		$other_write = '0000';
+	if(!isset($other_execute))
+		$other_execute = '0000';	
+
+	// perform a bitwise or to all the fields to generate the octal
+	// code. note that this will not generate the leading 0 so if
+	// the MSBs are not set, we will need to manually add the 0s in
+	$octal_output = $suid | $sgid | $sticky_bit
+				| $user_read | $user_write | $user_execute
+				| $group_read | $group_write | $group_execute
+				| $other_read | $other_write | $other_execute;
+
+	echo (string)$octal_output;
+	echo "....";
+	$octal_strlength = strlen((string)$octal_output);
+	echo $octal_strlength;
+
+	// append leading zeros as needed
+	if ($octal_strlength == 1)
+		$octal_output = '000' . (string)$octal_output;
+	elseif ($octal_strlength == 2)
+		$octal_output = '00' . (string)$octal_output;
+	elseif ($octal_strlength == 3)
+		$octal_output = '0' . (string)$octal_output;
+
+	return View::make('unix-permissions-calculator')
+			->with('octal_output', $octal_output);
+});	
+
 ?>
