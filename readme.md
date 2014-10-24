@@ -9,10 +9,17 @@ The lorem ipsum text paragraph and random user generators were taken from packag
 lorem-ipsum: https://packagist.org/packages/badcow/lorem-ipsum<br>
 Random User: https://packagist.org/packages/fzaninotto/faker
 
+### Form Validation
+Form validation was performed for the lorem-ipsum paragrpah generator, random user generator, and xkcd password generator pages. The first two pages
+had text input blocks that needed constraints/rules added but the xkcd password generator only had dropdown and radio buttons so individual inputs
+did not need to be validated but we needed to validate the MinWordLength was less than or equal to MaxWordLength so some additional logic was added
+the routes.php file.
+
 ### Interesting Code Modifications
 1. In order to have the class Passwdgen() recognized by the blade.php files, I needed to run composer dump-autoload (found out prior to lecture 7)
 2. usort() needed to be changed after it was inserted into a class
-3. Parameters for validation rules and messages arrays are case sensitive
+3. Parameters for validation rules and messages arrays are case sensitive (noticed this sometimes but not always?)
+4. Needed to have at least two rules and messages to get correct validation?? This was observed in the xkcd-passwd form validation in routes.php
 
 ## Laravel PHP Framework
 
