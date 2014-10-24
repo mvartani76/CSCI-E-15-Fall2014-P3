@@ -7,6 +7,16 @@
 		@stop
 		@section('content')
 		<div class="well">
+			<h2 class= "text-primary">Web App Description</h2>
+			<blockquote>This web application utilizes the Laravel framework and blade templating to create four different views as described
+				in the sections below on this page. Every attempt was made to replace all code with laravel helpers and blade templates but I
+				have to admit I may have missed a few here and there, especially if given difficulty with the helper/template syntax.<br><br>
+				The Lorem-Ipsum Generator and the Random User Generator use packages from Packagist.org as cited in the P3 project description.<br><br>
+				Logic for the various sections was incorporated into the routes views and sometimes incorporating classes to improve DRY but to be
+				honest, more time should have been spent really making the code more efficient.
+			</blockquote>
+		</div>
+		<div class="well">
 			<h2 class= "text-success">Lorem Ipsum Generator</h2>
 			<blockquote>Lorem Ipsum is random latin dummy text used by publishers and graphic designers that has the flow
 				of words, sentences, and paragraphs in English and other latin based languages.<br><br>
@@ -32,6 +42,14 @@
 				independent of the characters use as a computer does not care if the password contains actual words or not.
 			</blockquote>
 			<a href='/xkcd-passwd-gen' class="btn btn-success">Generate xkcd Passwords...</a>
+		</div>
+		<div class="well">
+			<h2 class="text-info">Unix Permissions Calculator</h2>
+			<blockquote>The Unix Permissions Calculator will generate the octal code for the user required permissions bit. The inspiration for this code is taken from
+				the link in the Project 3 description, <a href="http://permissions-calculator.org/">permissions-calculator.org</a>. In Unix, these permissions are set
+				using the <strong>chmod</strong> command.
+			</blockquote>
+			<a href='/unix-permissions-calculator' class="btn btn-danger">Generate Octal Code Permissions...</a>
 		</div>
 		@stop
 	</body>
