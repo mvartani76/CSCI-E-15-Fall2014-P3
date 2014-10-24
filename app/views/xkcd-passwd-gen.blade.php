@@ -3,6 +3,8 @@
 		@extends('master')
 		@section('header')
 			{{ HTML::style('css/bootstrap.css'); }}
+			{{ link_to('/', 'Back to the Main Page', array("class"=>"btn btn-warning")) }}
+			 <h2>xkcd Password Generator</h2>
 			{{ HTML::style('//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css'); }}
 			{{ HTML::script('//code.jquery.com/jquery-1.10.2.js'); }}
 			{{ HTML::script('//code.jquery.com/ui/1.11.1/jquery-ui.js'); }}
@@ -34,23 +36,8 @@
 					});
 				});
 			</script>
-
-			{{ link_to('/', 'Back to the Main Page', array("class"=>"btn btn-warning")) }}
-    		<meta charset="utf-8">
-    		<title>xkcd Password Generator</title>
-    		<meta name="viewport" content="width=device-width, initial-scale=1">
 		@stop
 		@section('content')
-			<div class="page-header" id="banner">
-		        <div class="row">
-		          <div class="col-lg-8 col-md-7 col-sm-6">
-		            <h1>xkcd Password Generator</h1>
-		            <p class="lead">Implementation by Mike Vartanian</p>
-		          </div>
-		          <div class="col-lg-4 col-md-5 col-sm-6">
-		          </div>
-		        </div>
-		    </div>
 
 		<!-- Web App Description Section
 	      ================================================== -->
